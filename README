@@ -1,3 +1,15 @@
+This repo contains the RTMPDUMP with KSV patch with the Makefile's for KSV and librtmp editied to work with 
+Entware-ng. This has only been tested on Synology Diskstation with arm7, but should work on any Entware-ng 
+compatible device.
+
+[Entware-ng](https://github.com/Entware-ng/Entware-ng/wiki)
+[Entware-ng gcc](https://github.com/Entware-ng/Entware-ng/wiki/Using-gcc-(native-compilation))
+
+Tracks upstream to rtmpdump-ksv repo.
+
+
+---
+
 **Note from burntsushi**: If you're getting segfaults, try compiling with
 `make SHARED=`.
 

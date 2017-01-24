@@ -1,15 +1,15 @@
 VERSION=v2.4
 
-prefix=/usr/local
+prefix=/opt
 
 incdir=$(prefix)/include/librtmp
 bindir=$(prefix)/bin
 libdir=$(prefix)/lib
 mandir=$(prefix)/man
-BINDIR=$(DESTDIR)$(bindir)
-INCDIR=$(DESTDIR)$(incdir)
-LIBDIR=$(DESTDIR)$(libdir)
-MANDIR=$(DESTDIR)$(mandir)
+BINDIR=$(bindir)
+INCDIR=$(incdir)
+LIBDIR=$(libdir)
+MANDIR=$(mandir)
 
 CC=$(CROSS_COMPILE)gcc
 LD=$(CROSS_COMPILE)ld
@@ -74,8 +74,8 @@ SO_INST=$(SOINST_$(SHARED))
 
 DEF=-DRTMPDUMP_VERSION=\"$(VERSION)\" $(CRYPTO_DEF) $(XDEF)
 OPT=-O2
-CFLAGS=-Wall $(XCFLAGS) $(INC) $(DEF) $(OPT) $(SO_DEF)
-LDFLAGS=$(XLDFLAGS)
+CFLAGS=-Wall $(XCFLAGS) $(INC) $(DEF) $(OPT) $(SO_DEF) -O2 -pipe -march=armv7-a -mtune=cortex-a9 -fno-caller-saves -mfloat-abi=soft
+LDFLAGS=$(XLDFLAGS) -Wl,-rpath=/opt/lib -Wl,--dynamic-linker=/opt/lib/ld-linux.so.3 -L/opt/lib
 
 
 OBJS=rtmp.o log.o amf.o hashswf.o parseurl.o

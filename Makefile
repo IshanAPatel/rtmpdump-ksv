@@ -1,6 +1,6 @@
 VERSION=v2.4
 
-prefix=/usr/local
+prefix=/opt
 
 CC=$(CROSS_COMPILE)gcc
 LD=$(CROSS_COMPILE)ld
@@ -21,16 +21,16 @@ CRYPTO_DEF=$(DEF_$(CRYPTO))
 
 DEF=-DRTMPDUMP_VERSION=\"$(VERSION)\" $(CRYPTO_DEF) $(XDEF)
 OPT=-O2
-CFLAGS=-Wall $(XCFLAGS) $(INC) $(DEF) $(OPT)
-LDFLAGS=-Wall $(XLDFLAGS)
+CFLAGS=-Wall $(XCFLAGS) $(INC) $(DEF) $(OPT) -O2 -pipe -march=armv7-a -mtune=cortex-a9 -fno-caller-saves -mfloat-abi=soft
+LDFLAGS=-Wall $(XLDFLAGS) -Wl,-rpath=/opt/lib -Wl,--dynamic-linker=/opt/lib/ld-linux.so.3 -L/opt/lib
 
 bindir=$(prefix)/bin
 sbindir=$(prefix)/sbin
 mandir=$(prefix)/man
 
-BINDIR=$(DESTDIR)$(bindir)
-SBINDIR=$(DESTDIR)$(sbindir)
-MANDIR=$(DESTDIR)$(mandir)
+BINDIR=$(bindir)
+SBINDIR=$(sbindir)
+MANDIR=$(mandir)
 
 LIBS_posix=-lm
 LIBS_darwin=
